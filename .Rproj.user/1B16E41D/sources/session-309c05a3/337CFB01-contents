@@ -150,7 +150,7 @@ vector** (the proportion of `TRUE`s).
 mean(iris$Sepal.Length > 5)
 
 # Epidemiology Example: P(case) is the disease PREVALENCE in the cohort
-mean(cohort$outcome == "case") - a probability IS a proportion
+mean(cohort$outcome == "case") # a probability IS a proportion
 
 # P(smoker) — the exposure prevalence
 mean(cohort$smoker == "yes")
@@ -316,6 +316,26 @@ In screening language:
 - **prevalence** $=P(\text{disease})$,
 
 and the answer we want is the **positive predictive value** $P(\text{disease}\mid +)$.
+
+## The diagnostic 2×2 table {.smaller}
+
+Picture screening **100,000 people** with this test — 89%
+sensitivity, 93% specificity, for a disease with **0.35% prevalence**. Everyone
+lands in one of four cells:
+
+|                   | Disease **present** | Disease **absent** | Total |
+|-------------------|:---:|:---:|:---:|
+| **Test positive** | 312 (TP) | 6,975 (FP) | **7,287** |
+| **Test negative** | 38 (FN) | 92,675 (TN) | 92,713 |
+| **Total**         | 350 | 99,650 | 100,000 |
+
+- **Sensitivity** $=\frac{TP}{TP+FN}=\frac{312}{350}\approx 0.89$ — of the diseased, who tests positive.
+- **Specificity** $=\frac{TN}{TN+FP}=\frac{92{,}675}{99{,}650}\approx 0.93$ — of the healthy, who tests negative.
+- **PPV** $=\frac{TP}{TP+FP}=\frac{312}{7{,}287}\approx 0.043$ — of the test-positives, who is truly sick.
+
+Of the **7,287** people who test positive, only **312** are actually ill, the
+other **6,975 are false positives**.
+
 
 ## Why a positive test can still mean low risk {.smaller}
 
