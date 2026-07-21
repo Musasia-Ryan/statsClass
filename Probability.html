@@ -247,7 +247,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNl
 
 </div>
 <script type="webr-3-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgUHJhY3RpY2U6IFAoU2VwYWwuTGVuZ3RoID4gNSkg4oCUIGEgc2ltcGxlIGV2ZW50IG9uIGlyaXMgZGF0YXNldFxubWVhbihpcmlzJFNlcGFsLkxlbmd0aCA+IDUpXG5cbiMgRXBpZGVtaW9sb2d5IEV4YW1wbGU6IFAoY2FzZSkgaXMgdGhlIGRpc2Vhc2UgUFJFVkFMRU5DRSBpbiB0aGUgY29ob3J0XG5tZWFuKGNvaG9ydCRvdXRjb21lID09IFwiY2FzZVwiKSAtIGEgcHJvYmFiaWxpdHkgSVMgYSBwcm9wb3J0aW9uXG5cbiMgUChzbW9rZXIpIOKAlCB0aGUgZXhwb3N1cmUgcHJldmFsZW5jZVxubWVhbihjb2hvcnQkc21va2VyID09IFwieWVzXCIpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgUHJhY3RpY2U6IFAoU2VwYWwuTGVuZ3RoID4gNSkg4oCUIGEgc2ltcGxlIGV2ZW50IG9uIGlyaXMgZGF0YXNldFxubWVhbihpcmlzJFNlcGFsLkxlbmd0aCA+IDUpXG5cbiMgRXBpZGVtaW9sb2d5IEV4YW1wbGU6IFAoY2FzZSkgaXMgdGhlIGRpc2Vhc2UgUFJFVkFMRU5DRSBpbiB0aGUgY29ob3J0XG5tZWFuKGNvaG9ydCRvdXRjb21lID09IFwiY2FzZVwiKSAjIGEgcHJvYmFiaWxpdHkgSVMgYSBwcm9wb3J0aW9uXG5cbiMgUChzbW9rZXIpIOKAlCB0aGUgZXhwb3N1cmUgcHJldmFsZW5jZVxubWVhbihjb2hvcnQkc21va2VyID09IFwieWVzXCIpIn0=
 </script>
 </div>
 </div>
@@ -444,6 +444,46 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBf
 <li><strong>prevalence</strong> <span class="math inline">\(=P(\text{disease})\)</span>,</li>
 </ul>
 <p>and the answer we want is the <strong>positive predictive value</strong> <span class="math inline">\(P(\text{disease}\mid +)\)</span>.</p>
+</section>
+<section id="the-diagnostic-22-table" class="slide level2 smaller">
+<h2>The diagnostic 2×2 table</h2>
+<p>Picture screening <strong>100,000 people</strong> with this test — 89% sensitivity, 93% specificity, for a disease with <strong>0.35% prevalence</strong>. Everyone lands in one of four cells:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease <strong>present</strong></th>
+<th style="text-align: center;">Disease <strong>absent</strong></th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test positive</strong></td>
+<td style="text-align: center;">312 (TP)</td>
+<td style="text-align: center;">6,975 (FP)</td>
+<td style="text-align: center;"><strong>7,287</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Test negative</strong></td>
+<td style="text-align: center;">38 (FN)</td>
+<td style="text-align: center;">92,675 (TN)</td>
+<td style="text-align: center;">92,713</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">350</td>
+<td style="text-align: center;">99,650</td>
+<td style="text-align: center;">100,000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Sensitivity</strong> <span class="math inline">\(=\frac{TP}{TP+FN}=\frac{312}{350}\approx 0.89\)</span> — of the diseased, who tests positive.</li>
+<li><strong>Specificity</strong> <span class="math inline">\(=\frac{TN}{TN+FP}=\frac{92{,}675}{99{,}650}\approx 0.93\)</span> — of the healthy, who tests negative.</li>
+<li><strong>PPV</strong> <span class="math inline">\(=\frac{TP}{TP+FP}=\frac{312}{7{,}287}\approx 0.043\)</span> — of the test-positives, who is truly sick.</li>
+</ul>
+<p>Of the <strong>7,287</strong> people who test positive, only <strong>312</strong> are actually ill, the other <strong>6,975 are false positives</strong>.</p>
 </section>
 <section id="why-a-positive-test-can-still-mean-low-risk" class="slide level2 smaller">
 <h2>Why a positive test can still mean low risk</h2>
