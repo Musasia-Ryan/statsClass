@@ -1,0 +1,31 @@
+library(malariaAtlas)
+library(terra)
+library(sf)
+library(ggplot2)
+
+# data
+ken <- getShp(ISO = "KEN", admin_level = "admin0")
+pf  <- getRaster(dataset_id = "Malaria__202508_Global_Pf_Parasite_Rate",
+                 shp = ken, year = 2022)
+
+# convert for ggplot
+pf_df  <- as.data.frame(pf, xy = TRUE)
+names(pf_df)[3] <- "pfpr"          # rename the value column
+ken_sf <- sf::st_as_sf(ken)
+
+# plot
+ggplot() +
+  geom_raster(data = pf_df, aes(x, y, fill = pfpr)) +
+  geom_sf(data = ken_sf, fill = NA, color = "#3a3340", linewidth = 0.3) +
+  scale_fill_viridis_c(option = "inferno", direction = -1,
+                       name = expression(italic(Pf)*"PR"[2-10]),
+                       na.value = "transparent") +
+  coord_sf(expand = FALSE) +
+  labs(title = "Malaria endemicity — Kenya",
+       subtitle = expression(italic("P. falciparum")*" parasite rate, children 2–10, 2022"),
+       caption = "Modeled surface · Malaria Atlas Project (PfPR2-10)") +
+  theme_minimal() +
+  theme(axis.title = element_blank(),
+        panel.grid = element_blank())
+
+ggsave("pfpr_kenya_2022.png", width = 8, height = 9, dpi = 200)

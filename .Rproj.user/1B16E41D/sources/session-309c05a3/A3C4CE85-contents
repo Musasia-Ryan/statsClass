@@ -1,0 +1,490 @@
+/*-- scss:defaults --*/
+
+/************************************************
+*
+*        CEMA Reveal.js Theme
+*        Author: Ryan Musasia
+*
+************************************************/
+
+// -------------------------------------------------
+// Fonts
+// -------------------------------------------------
+
+$font-family-sans-serif: "Aptos", "Calibri", "Segoe UI", Arial, sans-serif;
+$presentation-heading-font: $font-family-sans-serif;
+$presentation-font-size-root: 34px;
+
+
+// -------------------------------------------------
+// Colours
+// -------------------------------------------------
+
+$cema-orange: #F58220;
+$cema-blue: #2DA7E0;
+$cema-grey: #666666;
+$cema-light-grey: #E5E5E5;
+$cema-dark: #222222;
+
+$body-bg: #ffffff;
+$body-color: #111111;
+$link-color: $cema-blue;
+
+$presentation-heading-color: #111111;
+$presentation-heading-font-weight: 600;
+
+
+/************************************************
+*
+*      GLOBAL SLIDE
+*
+************************************************/
+
+.reveal .slides section {
+
+  text-align: left;
+
+  padding-left: 110px;
+  padding-right: 90px;
+  padding-top: 55px;
+  padding-bottom: 70px;
+
+  background: white;
+
+}
+
+
+/************************************************
+*
+*      AFRICA ICON
+*
+************************************************/
+
+.reveal .slides section::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 20px;
+  top: 12px;
+
+  width: 95px;
+  height: 120px;
+
+  background-image: url("assets/africa.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+
+
+/************************************************
+*
+*      CEMA LOGO
+*
+************************************************/
+
+.reveal .slides section::after {
+
+  content: "";
+
+  position: absolute;
+
+  right: 18px;
+  bottom: 10px;
+
+  width: 230px;
+  height: 70px;
+
+  background-image: url("assets/cema_logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+
+
+/************************************************
+*
+*      TITLES
+*
+************************************************/
+
+.reveal h1 {
+
+  font-size: 2.2em;
+  font-weight: 600;
+
+  color: #111;
+
+  margin-bottom: 18px;
+
+  padding-bottom: 12px;
+
+  border-bottom: 4px solid $cema-grey;
+
+}
+
+.reveal h2 {
+
+  color: $cema-orange;
+
+  font-size: 1.45em;
+
+  margin-top: .5em;
+
+}
+
+.reveal h3{
+
+  color:$cema-blue;
+
+}
+
+
+/************************************************
+*
+*      TITLE SLIDE
+*
+************************************************/
+
+.reveal .title-slide {
+
+  text-align: center;
+
+}
+
+.reveal .title-slide h1{
+
+  border:none;
+
+  font-size:2.6em;
+
+  margin-top:100px;
+
+}
+
+.reveal .title-slide h2{
+
+  color:$cema-grey;
+
+}
+
+.reveal .title-slide h3{
+
+  color:$cema-grey;
+
+}
+
+
+/************************************************
+*
+*      PARAGRAPHS
+*
+************************************************/
+
+.reveal p{
+
+  line-height:1.5;
+
+  margin-top:.4em;
+
+  margin-bottom:.5em;
+
+}
+
+
+/************************************************
+*
+*      BULLETS
+*
+************************************************/
+
+.reveal ul{
+
+  margin-left:.8em;
+
+}
+
+.reveal li{
+
+  margin-bottom:.35em;
+
+}
+
+.reveal li::marker{
+
+  color:$cema-orange;
+
+}
+
+
+/************************************************
+*
+*      TABLES
+*
+************************************************/
+
+.reveal table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  font-size:.8em;
+
+}
+
+.reveal table th{
+
+  background:$cema-blue;
+
+  color:white;
+
+  padding:12px;
+
+}
+
+.reveal table td{
+
+  padding:10px;
+
+  border-bottom:1px solid #dddddd;
+
+}
+
+.reveal table tr:nth-child(even){
+
+  background:#F8F8F8;
+
+}
+
+
+/************************************************
+*
+*      CODE
+*
+************************************************/
+
+.reveal pre{
+
+  border-radius:10px;
+
+  border:1px solid #DDDDDD;
+
+  background:#FAFAFA;
+
+  padding:12px;
+
+  font-size:.65em;
+
+}
+
+.reveal code{
+
+  color:#C7254E;
+
+}
+
+
+/************************************************
+*
+*      BLOCK QUOTES
+*
+************************************************/
+
+.reveal blockquote{
+
+  border-left:6px solid $cema-orange;
+
+  background:#FAFAFA;
+
+  padding:20px;
+
+  width:90%;
+
+}
+
+
+/************************************************
+*
+*      CALLOUT BOXES
+*
+************************************************/
+
+.callout{
+
+  border-left:6px solid $cema-orange;
+
+  background:#fafafa;
+
+  border-radius:6px;
+
+  padding:15px;
+
+}
+
+
+/************************************************
+*
+*      IMAGES
+*
+************************************************/
+
+.reveal img{
+
+  border:none;
+
+  box-shadow:none;
+
+}
+
+
+/************************************************
+*
+*      LINKS
+*
+************************************************/
+
+.reveal a{
+
+  color:$cema-blue;
+
+}
+
+.reveal a:hover{
+
+  color:$cema-orange;
+
+}
+
+
+/************************************************
+*
+*      TWO COLUMNS
+*
+************************************************/
+
+.columns{
+
+  gap:40px;
+
+}
+
+.column{
+
+  padding-right:15px;
+
+}
+
+
+/************************************************
+*
+*      FOOTER
+*
+************************************************/
+
+.reveal .footer{
+
+  position:absolute;
+
+  bottom:18px;
+
+  left:110px;
+
+  color:$cema-grey;
+
+  font-size:.45em;
+
+}
+
+
+/************************************************
+*
+*      SLIDE NUMBERS
+*
+************************************************/
+
+.reveal .slide-number{
+
+  right:260px;
+
+  bottom:22px;
+
+  color:$cema-grey;
+
+}
+
+
+/************************************************
+*
+*      PROGRESS BAR
+*
+************************************************/
+
+.reveal .progress{
+
+  height:5px;
+
+  color:$cema-orange;
+
+}
+
+
+/************************************************
+*
+*      FRAGMENTS
+*
+************************************************/
+
+.reveal .fragment.highlight-current-blue.current-fragment{
+
+  color:$cema-blue;
+
+}
+
+
+/************************************************
+*
+*      SECTION SLIDES
+*
+************************************************/
+
+.section-slide{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  height:100%;
+
+}
+
+.section-slide h1{
+
+  border:none;
+
+  color:$cema-orange;
+
+  font-size:2.5em;
+
+}
+
+
+/************************************************
+*
+*      PRINT TO PDF
+*
+************************************************/
+
+@media print{
+
+.reveal .slides section{
+
+background:white !important;
+
+}
+
+}

@@ -1,0 +1,32 @@
+{
+    "id": "299A19F1",
+    "path": "~/Documents/rPractise/statsClass/test.qmd",
+    "project_path": "test.qmd",
+    "type": "quarto_markdown",
+    "hash": "1559237513",
+    "contents": "",
+    "dirty": false,
+    "created": 1784618462755.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "tempName": "Untitled3",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "22,3",
+        "scrollLine": "0",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "2:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1784618694,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1784618694453,
+    "read_only": false,
+    "read_only_alternatives": []
+}

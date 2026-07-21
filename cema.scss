@@ -1,0 +1,243 @@
+/*-- scss:defaults --*/
+
+/************************************************
+*        CEMA Reveal.js Theme  (2024 template match)
+*        Author: Ryan Musasia
+*
+*        Backgrounds (orange Africa hero) are applied with Reveal's NATIVE
+*        per-slide background layer via slide attributes in the .qmd
+*        (title-slide-attributes + `{background-image=...}`), NOT with CSS
+*        background-image. That layer sits behind content by design, so it
+*        can never cover your text.
+************************************************/
+
+// -------------------------------------------------
+// Fonts
+// -------------------------------------------------
+
+$font-family-sans-serif: "Aptos", "Calibri", "Segoe UI", Arial, sans-serif;
+$presentation-heading-font: $font-family-sans-serif;
+$presentation-font-size-root: 30px;
+
+// -------------------------------------------------
+// Colours  (matched to the CEMA logo)
+// -------------------------------------------------
+
+$cema-orange: #F58220;
+$cema-blue: #2DA7E0;
+$cema-navy: #356AC3;
+$cema-grey: #666666;
+$cema-rule-grey: #A5A5A5;
+$cema-light-grey: #E5E5E5;
+$cema-dark: #222222;
+
+$body-bg: #ffffff;
+$body-color: #111111;
+$link-color: $cema-blue;
+
+$presentation-heading-color: #111111;
+$presentation-heading-font-weight: 600;
+
+
+/*-- scss:rules --*/
+/************************************************
+*      GLOBAL SLIDE
+************************************************/
+
+.reveal .slides section {
+  box-sizing: border-box;   /* keep left/right padding INSIDE the slide width */
+  text-align: left;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+/* Belt-and-braces: never let content spill past the slide edge */
+.reveal .slides section > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/************************************************
+*      CEMA + UoN LOGO LOCKUP  (bottom-right, all slides)
+*      Driven by the `logo:` key in the YAML header.
+************************************************/
+
+/* Logo lockup: preserve the image's ORIGINAL proportions (3164:994) exactly.
+   We fix only the height and let width follow (auto), so the logo is never
+   stretched or squashed — it always displays at its native aspect ratio.
+   Adjust $logo-height to make it bigger/smaller; the shape never changes. */
+$logo-height: 66px;
+
+.reveal .slide-logo {
+  position: fixed !important;
+  height: $logo-height !important;
+  width: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  right: 24px !important;
+  bottom: 16px !important;
+  top: auto !important;
+  left: auto !important;
+  object-fit: contain !important;
+}
+
+/************************************************
+*      TITLES  +  GREY RULE
+************************************************/
+
+.reveal h1 { font-size: 1.6em; font-weight: 700; color: #111; }
+.reveal h2 { color: $cema-orange; font-size: 1.3em; margin-top: .4em; }
+.reveal h3 { color: $cema-blue; font-size: 1.05em; }
+
+/* Grey rule under the slide title on ordinary content slides
+   (mirrors the horizontal line in the CEMA_2024 template).
+   Explicitly excludes the auto-generated title slide (#title-slide)
+   and section dividers (.section-slide). */
+.reveal section.slide:not(.section-slide):not(#title-slide) > h1:first-child,
+.reveal section.slide:not(.section-slide):not(#title-slide) > h2:first-child {
+  border-bottom: 3px solid $cema-rule-grey;
+  padding-bottom: 12px;
+  margin-bottom: 22px;
+}
+
+/************************************************
+*      TITLE SLIDE  (text column; Africa via reveal bg layer)
+************************************************/
+
+/* Africa map sits on the LEFT (set in the .qmd); text is shifted to the right
+   so it stays clear of the map. To move the map back to the right, change the
+   .qmd background-position values to "right" and set $hero-text-shift: 0. */
+$hero-text-shift: 46%;
+
+#title-slide.quarto-title-block {
+  text-align: left;
+}
+
+#title-slide .title {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.15;
+  margin-left: $hero-text-shift;   /* clear the Africa map on the left */
+  max-width: 50%;
+  margin-bottom: .5em;
+  border: none;
+}
+
+#title-slide .subtitle,
+#title-slide .quarto-title .subtitle {
+  font-size: .74em;
+  color: $cema-orange;
+  font-style: italic;
+  margin-left: $hero-text-shift;
+  max-width: 48%;
+  margin-bottom: 1.4em;
+}
+
+#title-slide .quarto-title-authors {
+  display: block;
+  text-align: left;
+  margin-left: $hero-text-shift;
+  max-width: 50%;
+  border: none;
+}
+
+#title-slide .quarto-title-author { text-align: left; }
+
+#title-slide .quarto-title-author-name {
+  color: $cema-navy;
+  font-size: 1.05em;
+  font-weight: 600;
+}
+
+#title-slide .quarto-title-affiliation,
+#title-slide .quarto-title-author-email {
+  color: $cema-navy;
+  font-size: .58em;
+  line-height: 1.35;
+}
+
+/************************************************
+*      SECTION DIVIDERS
+*      `# Title {.section-slide background-image="assets/africa_orange.png" ...}`
+*      The Africa map comes from the reveal bg layer; we just colour the title.
+************************************************/
+
+.reveal .section-slide h1 {
+  border: none;
+  color: $cema-orange;
+  font-size: 2.1em;
+  margin-left: $hero-text-shift;   /* clear the Africa map on the left */
+  max-width: 50%;
+}
+
+/************************************************
+*      PARAGRAPHS / BULLETS
+************************************************/
+
+.reveal p { line-height: 1.45; margin-top: .35em; margin-bottom: .45em; }
+.reveal ul { margin-left: .8em; }
+.reveal li { margin-bottom: .3em; }
+.reveal li::marker { color: $cema-orange; }
+
+/************************************************
+*      TABLES
+************************************************/
+
+.reveal table { width: 100%; border-collapse: collapse; font-size: .78em; }
+.reveal table th { background: $cema-blue; color: #fff; padding: 10px; }
+.reveal table td { padding: 8px 10px; border-bottom: 1px solid #ddd; }
+.reveal table tr:nth-child(even) { background: #F8F8F8; }
+
+/************************************************
+*      CODE  +  WebR / quarto-live cells
+************************************************/
+
+.reveal pre { border-radius: 10px; border: 1px solid #DDD; background: #FAFAFA; padding: 10px; font-size: .58em; }
+.reveal code { color: #C7254E; }
+
+.reveal .cell,
+.reveal div[data-code-cell] { font-size: .6em; }
+
+.reveal .qwebr-editor,
+.reveal .exercise-editor,
+.reveal .monaco-editor { border-radius: 10px; border: 1px solid $cema-light-grey; }
+
+.reveal .qwebr-button-run,
+.reveal button.qwebr-button-run {
+  background: $cema-orange !important;
+  border-color: $cema-orange !important;
+  color: #fff !important;
+  border-radius: 6px;
+}
+.reveal .qwebr-output-code-area,
+.reveal .qwebr-output-code-stdout { border-left: 4px solid $cema-blue; }
+.reveal .qwebr-status-text { color: $cema-grey; font-size: .8em; }
+
+/************************************************
+*      BLOCK QUOTES / CALLOUTS / IMAGES / LINKS
+************************************************/
+
+.reveal blockquote { border-left: 6px solid $cema-orange; background: #FAFAFA; padding: 16px; width: 90%; }
+.callout { border-left: 6px solid $cema-orange; background: #fafafa; border-radius: 6px; padding: 14px; }
+.reveal img { border: none; box-shadow: none; }
+.reveal a { color: $cema-blue; }
+.reveal a:hover { color: $cema-orange; }
+
+/************************************************
+*      COLUMNS / FOOTER / SLIDE NUMBER / PROGRESS
+************************************************/
+
+.columns { gap: 40px; }
+.column { padding-right: 15px; }
+
+.reveal .footer { color: $cema-grey; font-size: .5em; }
+.reveal .slide-number { color: $cema-grey; background: transparent; }
+.reveal .progress { color: $cema-orange; }
+.reveal .progress span { background: $cema-orange; }
+
+/************************************************
+*      PRINT
+************************************************/
+
+@media print { .reveal .slides section { background: #fff !important; } }
