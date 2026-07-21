@@ -99,11 +99,11 @@ abline(h = 1/6, lty = 2, col = "#2DA7E0", lwd = 2)
 ## Our working example {.smaller}
 
 Throughout, we use a **simulated cohort** of 500 people with a smoking exposure
-and a disease outcome. Run this once — it builds `cohort` for the examples that
-follow. `iris` (built into R) serves as a neutral warm-up.
+and a disease outcome. Run this, it builds `cohort` data for the examples that
+follow. `iris` (built into R) serves as a practice.
 
 ```{webr}
-#| autorun: true
+#| autorun: false
 set.seed(2024)
 n <- 500
 smoke <- rbinom(n, 1, 0.40) # 40% are smokers

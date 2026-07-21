@@ -3,7 +3,7 @@
     "path": "~/Documents/rPractise/statsClass/Probability.qmd",
     "project_path": "Probability.qmd",
     "type": "quarto_markdown",
-    "hash": "2699114210",
+    "hash": "331190354",
     "contents": "",
     "dirty": false,
     "created": 1784618173864.0,
@@ -17,15 +17,15 @@
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "2:0",
-        "cursorPosition": "1,25",
-        "scrollLine": "0"
+        "cursorPosition": "102,50",
+        "scrollLine": "66"
     },
     "folds": "",
-    "lastKnownWriteTime": 1784624100,
+    "lastKnownWriteTime": 1784625987,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1784624100385,
+    "last_content_update": 1784625987454,
     "read_only": false,
     "read_only_alternatives": []
 }
