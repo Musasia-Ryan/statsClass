@@ -1,15 +1,11 @@
-// -------------------------------------------------
-// Fonts
-// -------------------------------------------------
+/*-- scss:defaults --*/
 
+// Fonts
 $font-family-sans-serif: "Aptos", "Calibri", "Segoe UI", Arial, sans-serif;
 $presentation-heading-font: $font-family-sans-serif;
 $presentation-font-size-root: 30px;
 
-// -------------------------------------------------
-// Colours
-// -------------------------------------------------
-
+// Colours 
 $cema-orange: #F58220;
 $cema-blue: #2DA7E0;
 $cema-navy: #356AC3;
@@ -26,8 +22,9 @@ $presentation-heading-color: #111111;
 $presentation-heading-font-weight: 600;
 
 
+/*-- scss:rules --*/
 .reveal .slides section {
-  box-sizing: border-box; 
+  box-sizing: border-box;   /* keep left/right padding INSIDE the slide width */
   text-align: left;
   padding-left: 70px;
   padding-right: 70px;
@@ -64,6 +61,7 @@ $logo-height: 66px;
   margin-bottom: 22px;
 }
 
+/* TITLE SLIDE*/
 $hero-text-shift: 46%;
 
 #title-slide.quarto-title-block {
@@ -122,18 +120,19 @@ $hero-text-shift: 46%;
   max-width: 50%;
 }
 
+/*PARAGRAPHS / BULLETS*/
 .reveal p { line-height: 1.45; margin-top: .35em; margin-bottom: .45em; }
 .reveal ul { margin-left: .8em; }
 .reveal li { margin-bottom: .3em; }
 .reveal li::marker { color: $cema-orange; }
 
-
+/*TABLES*/
 .reveal table { width: 100%; border-collapse: collapse; font-size: .78em; }
 .reveal table th { background: $cema-blue; color: #fff; padding: 10px; }
 .reveal table td { padding: 8px 10px; border-bottom: 1px solid #ddd; }
 .reveal table tr:nth-child(even) { background: #F8F8F8; }
 
-
+/*quarto-live cells*/
 .reveal pre { border-radius: 10px; border: 1px solid #DDD; background: #FAFAFA; padding: 10px; font-size: .58em; }
 .reveal code { color: #C7254E; }
 
@@ -155,13 +154,11 @@ $hero-text-shift: 46%;
 .reveal .qwebr-output-code-stdout { border-left: 4px solid $cema-blue; }
 .reveal .qwebr-status-text { color: $cema-grey; font-size: .8em; }
 
-
 .reveal blockquote { border-left: 6px solid $cema-orange; background: #FAFAFA; padding: 16px; width: 90%; }
 .callout { border-left: 6px solid $cema-orange; background: #fafafa; border-radius: 6px; padding: 14px; }
 .reveal img { border: none; box-shadow: none; }
 .reveal a { color: $cema-blue; }
 .reveal a:hover { color: $cema-orange; }
-
 
 .columns { gap: 40px; }
 .column { padding-right: 15px; }

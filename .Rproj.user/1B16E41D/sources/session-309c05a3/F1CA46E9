@@ -3,7 +3,7 @@
     "path": "~/Documents/rPractise/statsClass/cema.scss",
     "project_path": "cema.scss",
     "type": "scss",
-    "hash": "919659966",
+    "hash": "2785600695",
     "contents": "",
     "dirty": false,
     "created": 1784548410860.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "171,52",
-        "scrollLine": "115"
+        "cursorPosition": "3,8",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1784700392,
+    "lastKnownWriteTime": 1784700923,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1784700392664,
+    "last_content_update": 1784700923239,
     "read_only": false,
     "read_only_alternatives": []
 }
