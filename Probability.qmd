@@ -280,9 +280,9 @@ Comparing a conditional probability across exposure groups gives the **risk rati
 p_exposed   <- mean(cohort$outcome[cohort$smoker == "yes"] == "case")
 p_unexposed <- mean(cohort$outcome[cohort$smoker == "no"]  == "case")
 
-cat("Risk | smoker      =", round(p_exposed,   3), "\n")
-cat("Risk | non-smoker  =", round(p_unexposed, 3), "\n")
-cat("Risk ratio         =", round(p_exposed / p_unexposed, 2), "\n")
+cat("Risk | smoker =", round(p_exposed,   3), "\n")
+cat("Risk | non-smoker =", round(p_unexposed, 3), "\n")
+cat("Risk ratio =", round(p_exposed / p_unexposed, 2), "\n")
 ```
 
 ::: {.fragment}

@@ -1,11 +1,11 @@
 {
     "id": "31B54E87",
-    "path": null,
-    "project_path": null,
+    "path": "~/Documents/rPractise/statsClass/geneMalaria.R",
+    "project_path": "geneMalaria.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "2452728186",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1784022714666.0,
     "source_on_save": false,
     "relative_order": 2,
@@ -17,11 +17,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 0,
-    "encoding": "",
+    "lastKnownWriteTime": 1784700077,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1784030429288,
+    "last_content_update": 1784700077711,
     "read_only": false,
     "read_only_alternatives": []
 }

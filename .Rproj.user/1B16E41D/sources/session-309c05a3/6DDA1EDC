@@ -1,26 +1,26 @@
 {
-    "id": "F5600DDF",
+    "id": "6DDA1EDC",
     "path": "~/Documents/rPractise/statsClass/README.md",
     "project_path": "README.md",
     "type": "markdown",
-    "hash": "1057788676",
+    "hash": "1828890361",
     "contents": "",
     "dirty": false,
-    "created": 1784625867939.0,
+    "created": 1784700177097.0,
     "source_on_save": false,
-    "relative_order": 7,
+    "relative_order": 4,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "0,2",
+        "cursorPosition": "0,19",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1784625902,
+    "lastKnownWriteTime": 1784700184,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1784625902407,
+    "last_content_update": 1784700184126,
     "read_only": false,
     "read_only_alternatives": []
 }
