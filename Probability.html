@@ -155,8 +155,43 @@ Ryan Musasia
 </div>
 
 </section>
+<section class="slide level2">
+
+<aside class="notes">
+<p>Today I will take you through Probability where majority of the concepts in this course stands on — risk, diagnostic testing, and statistical inference are all probability disguise.</p>
+<p>Set the tone: This slide deck is interactive. The grey boxes are live R — I’ll run them as we go, and because it’s hosted online you can open the same link on your laptop, edit the code, and re-run it yourself.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="from-data-to-decisions" class="slide level2 smaller">
 <h2>From data to decisions</h2>
+<aside class="notes">
+<p>Probability is the language for uncertainty, and it lets us go from what we measured in a sample to a claim about the whole population.”</p>
+<ul>
+<li><p>Prevalence &amp; risk: a probability is just a proportion of people. “The chance a random person is a case” and “the prevalence” are similar.</p></li>
+<li><p>Diagnostic testing — explain each in plain words (think of a smoke alarm): • Sensitivity — how good the test is at CATCHING people who really are sick. Out of 100 people who truly have the disease, how many does it correctly call positive? • Specificity — how good the test is at giving the ALL-CLEAR to people who are NOT sick. Out of 100 healthy people, how many does it correctly call negative? (think of an email spam filter, where “positive” = flagged as spam) How well it LEAVES YOUR REAL EMAILS ALONE. Of all your genuine messages, how many does it correctly keep out of the spam folder? A specific filter rarely bins a real email by mistake • Positive predictive value (PPV) — it answer’s the question: “Of all the people who test positive, what fraction are truly sick.” • Negative predictive value (NPV) — the mirror: “Of all the people who test negative, what fraction are truly healthy (disease-free).”</p></li>
+<li><p>Inference: p-values and confidence intervals are probability statements. If the probability model is shaky, the inference is too.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>You have already summarise data and fit models. <strong>Probability</strong> is the connective tissue underneath: it is how we quantify <em>uncertainty</em> and move from a sample to a statement about a population.</p>
 <p>In public health it is behind:</p>
 <ul>
@@ -174,6 +209,23 @@ Ryan Musasia
 </section>
 <section id="defining-probability" class="slide level2 smaller">
 <h2>Defining probability</h2>
+<aside class="notes">
+<p>Two ideas live on this slide</p>
+<p>Idea 1 — long-run frequency: The probability of something is the fraction of times it happens if you repeat the experiment over and over. We can’t roll forever, but that fraction is the target we’re heading toward.</p>
+<p>Idea 2 — the counting shortcut: “When the outcomes are all equally likely, we don’t need to repeat anything — we just count: favourable outcomes over total outcomes.” The die is perfect because all six faces are equally likely.</p>
+<p>Walk the four bullets as an escalating story — each one teaches a new rule: - P(1) = 1/6 — the base case. Ask the room “what’s the chance of a 4?” so they say 1/6 too and feel the symmetry. - P(1 or 2) = 2/6 = 1/3 — widen the event to two faces. This is the ADDITION idea; note in passing “a die can’t show 1 and 2 at once” — quietly introduces mutually exclusive events (slide 1.7). - P(any of 1–6) = 1 — something MUST happen, so probability 1 = certainty. Anchor the top of the scale; contrast with rolling a 7 (probability 0) for the bottom. - P(not a 2) = 5/6 — the COMPLEMENT. Show it two ways: count the five non-2 faces, OR do 1 − 1/6. Land the payoff:</p>
+<p>Transition: “Let’s watch that first idea, long-run frequency actually happen.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Intuitively, the <strong>probability</strong> of an outcome is the proportion of times it would occur if the experiment were repeated indefinitely. Its a <em>long-run relative frequency</em>.</p>
 <p>When a finite set of outcomes is <strong>equally likely</strong>,</p>
 <p><span class="math display">\[P(A)=\frac{\text{number of outcomes in } A}{\text{total number of outcomes}}.\]</span></p>
@@ -187,6 +239,28 @@ Ryan Musasia
 </section>
 <section id="defining-probability-live" class="slide level2 smaller">
 <h2>Defining probability, live</h2>
+<aside class="notes">
+<p>Step 1 — run the cell. The four printed lines just confirm the dice numbers from the last slide (1/6, 1/3, 1, 5/6). Read them off quickly; the plot is the star.</p>
+<p>Step 2 — TALK THROUGH THE PLOT: - Orange is what actually HAPPENED — the running proportion of 1s as rolls pile up. Blue dashed is the TRUTH we’re chasing: exactly 1/6 ≈ 0.167. Blue isn’t a simulation; abline() just paints a flat marker at 1/6.” Stress: these are observed-vs-truth, NOT two competing scenarios (students often assume one line is one method, the other another — it isn’t).</p>
+<p>— HOW THE ROLLING WORKS 1) sample(die, 6000, replace = TRUE) = “draw a face 6,000 times, putting the die back each time” — every roll independent, all six faces always available. 2) rolls == 1 marks each roll yes/no (is it a 1?). 3) cumsum(…)/seq_along(…) = running tally of 1s ÷ rolls so far = the orange line. (set.seed(1) just makes the rolls reproducible, not less random.) The very first roll here is a 1, so the line starts at a wild 1.0, then drifts down as the early luck gets diluted — ending ~0.163, a hair under 1/6.</p>
+<p>— WHY JUMPY EARLY, SMOOTH LATE — use the GRADE-AVERAGE analogy (this is the one): “The orange line behaves exactly like your exam average. Your FIRST exam IS your average — one mark, 100% of the weight, so it can sit anywhere. A second exam can still swing it hugely. But after 30 exams, one more paper barely nudges your average — it’s diluted by all the others. Each die roll is just ‘one more exam’ added in.</p>
+<p>Few results → volatile average; many results → rock-steady average.”</p>
+<p>— BANK THE LESSON (say it explicitly): “The gap between orange and blue is sampling error, and it shrinks as the sample grows. Same reason a prevalence from 20 patients bounces around but one from 5,000 is trustworthy — the seed of statistical inference.”</p>
+<ul>
+<li>Name it: “This is the Law of Large Numbers, and it IS the frequentist definition of probability — the long-run proportion converging to the true value.”</li>
+</ul>
+<p>Step 3 — make it interactive. Ask a student: “Change 6000 to 100 and re-run.” It never really settles — the point of small samples. Then change set.seed(1) to another number (or delete it) and re-run to show a DIFFERENT random path that still lands near 1/6. Different journeys, same destination.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>The <strong>frequentist</strong> definition in action: as we keep rolling, the observed proportion of 1s settles at <span class="math inline">\(1/6\)</span>.</p>
 <div class="cell" data-autorun="false">
 <div>
@@ -220,6 +294,25 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNl
 </section>
 <section id="sample-space-and-events" class="slide level2">
 <h2>Sample space and events</h2>
+<aside class="notes">
+<p>“Before we can talk about the probability of something, we have to be clear about what CAN happen. That full list of possibilities is the sample space.”</p>
+<p>Define the two terms concretely: - Sample space (S) = the set of ALL possible outcomes of an experiment. Event = any subset of S — one outcome, several, or none. - If the outcomes are all equally likely, each single one has probability 1/|S| (|S| = how many outcomes there are). Tie back to the die: S = {1,2,3,4,5,6}, |S| = 6, each face 1/6.</p>
+<p>The subtlety worth flagging (from the iris warm-up): the sample space depends on WHAT YOU DECIDE TO RECORD. “Pick a flower and note its SPECIES” → S = {setosa, versicolor, virginica}, just three outcomes, so P(setosa) = 1/3.</p>
+<p>But “pick a flower and note ALL its measurements” → a huge sample space. Same flower, different experiment, different S. Good 20-second point: you define the experiment, you define the sample space.</p>
+<p>Simple vs compound: - Simple event = a single outcome. e.g.&nbsp;“the person I drew is a case.” - Compound event = more than one outcome bundled together. e.g.&nbsp;“case AND smoker,” or “Sepal.Length &gt; 5” (which is true for MANY flowers, so it’s compound).</p>
+<p>Bridge to epidemiology (say it): “Our experiment this session is ‘draw a random person from the cohort.’ The sample space is every person; an event is any group we care about — the cases, the smokers, the over-50s. Probability is just how big that group is relative to everyone.”</p>
+<p>Question to the room: “If I draw one person and record only their disease status, what’s my sample space?” (Answer: {case, control} — two outcomes.) “Now if I also record smoking status?” (Four combinations.) Shows how recording more expands S.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>The <strong>sample space</strong> <span class="math inline">\(S\)</span> is the set of all possible outcomes of an experiment. An <strong>event</strong> is any subset of <span class="math inline">\(S\)</span>. If all <span class="math inline">\(|S|\)</span> outcomes are equally likely, each has probability <span class="math inline">\(1/|S|\)</span>.</p>
 <ul>
 <li>A <strong>simple event</strong> is a single outcome (e.g.&nbsp;a randomly chosen person is a <em>case</em>).</li>
@@ -240,6 +333,19 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNl
 </section>
 <section id="events-as-probabilities-in-r" class="slide level2 smaller">
 <h2>Events as probabilities in R</h2>
+<aside class="notes">
+<p>Purpose (~2–3 min): the single most useful coding idea of the day. Lead: “In R, an event is just a TRUE/FALSE question about each person, and mean() of that gives the proportion that are TRUE — which IS the probability.” - Run it. iris warm-up: mean(Sepal.Length &gt; 5) = 0.787. Then epi: P(case) = 0.172 (the prevalence), P(smoker) = 0.436. - Hammer the fragment: probability and proportion are the SAME object. “0.172 is both ‘the probability a random person is a case’ AND ‘the prevalence.’” Question: “How would you write P(age &gt; 60)?” (mean(cohort$age &gt; 60).) Transition: “Now let’s combine events — AND, OR, NOT.” → next.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>An event is a logical condition. Its probability is the <strong>mean of that logical vector</strong> (the proportion of <code>TRUE</code>s).</p>
 <div class="cell" data-autorun="false">
 <div>
@@ -262,6 +368,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMg
 </section>
 <section id="combining-events" class="slide level2 smaller">
 <h2>Combining events</h2>
+<aside class="notes">
+<ul>
+<li>Walk the table: union (OR), intersection (AND), difference (but not), complement (not). Sketch a two-circle Venn with your hands.</li>
+<li>The union MINUS term is the one to explain: “why subtract the overlap? People who are BOTH get counted in P(A) and again in P(B) — subtract them once to fix the double-count.”</li>
+<li>Complement = the workhorse shortcut (callback to dice ‘not a 2’: 1 − P).</li>
+<li>Empty set = impossible event, probability 0. Question: “In a Venn diagram, which region is A − B?” (A, minus the overlap.) Transition: “Let’s compute all four on the cohort, one line each.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <table class="caption-top">
 <colgroup>
 <col style="width: 25%">
@@ -308,6 +432,23 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMg
 </section>
 <section id="set-operations-in-r" class="slide level2 smaller">
 <h2>Set operations in R</h2>
+<aside class="notes">
+<ul>
+<li>Run the cell. Point out the operators: | = OR (union), &amp; = AND (intersection), ! = NOT (complement), &amp; ! = difference.</li>
+<li>Read results: P(smoker)=0.436, P(case)=0.172, union 0.482, intersect 0.126, smoker-only 0.310, not-case 0.828.</li>
+<li>Do the union-rule check LIVE (the fragment): 0.436 + 0.172 − 0.126 = 0.482 — exactly mean(S | D). “Formula and direct count agree — the addition rule working.” Question: get a student to predict P(smoker OR case) before you reveal it, then check. Transition: “We’ve been doing favourable-over-total without naming it — let’s make the definition explicit.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell" data-autorun="false">
 <div>
 <div id="webr-4" class="exercise-cell">
@@ -329,6 +470,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IlMg
 </section>
 <section id="what-a-probability-is" class="slide level2 smaller">
 <h2>What a probability is</h2>
+<aside class="notes">
+<ul>
+<li>Classical formula: favourable ÷ total (already intuitive from the die).</li>
+<li>Three axioms in plain words: probabilities are never negative; something in S is certain (P(S)=1); for disjoint events, probabilities add. “Everything in probability is built from these three.”</li>
+<li>Frequentist reading → why mean() estimates a probability, and why bigger samples are steadier (callback to the die plot).</li>
+<li>Run the cell: prevalence estimated from n = 20, 100, 500 — watch it steady as n grows. Re-run to show the n=20 estimate jumping around. Question: “Which estimate would you trust — n=20 or n=500? Why?” Transition: “One more term before conditioning — events that can’t co-occur.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Classically, for equally likely outcomes, <span class="math display">\[P(A) = \frac{\text{number of outcomes in } A}{\text{total number of outcomes in } S}.\]</span></p>
 <p>Every probability obeys three axioms:</p>
 <ul>
@@ -354,6 +513,23 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMg
 </section>
 <section id="events-that-cannot-co-occur" class="slide level2 smaller">
 <h2>Events that cannot co-occur</h2>
+<aside class="notes">
+<ul>
+<li>“Mutually exclusive = can’t both happen. Then P(A∩B)=0 and OR simply ADDS.”</li>
+<li>Case vs control: mutually exclusive (nobody is both) → run it: mean(case &amp; control)=0.</li>
+<li>BUT smoker &amp; case are NOT exclusive → 0.126. “And that’s the whole point: because they CAN co-occur, they can be ASSOCIATED. If exposure and disease were mutually exclusive, smoking would perfectly PREVENT disease.” Question: “Name two health events that ARE mutually exclusive, and two that AREN’T.” Transition: “When events can co-occur, we ask — given one, what’s the chance of the other? That’s conditioning.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Two events are <strong>mutually exclusive</strong> (disjoint) when they cannot happen together: <span class="math inline">\(A \cap B = \varnothing\)</span>, so <span class="math inline">\(P(A\cap B)=0\)</span> and the addition rule simplifies to <span class="math display">\[P(A\cup B)=P(A)+P(B).\]</span></p>
 <p>A person’s disease status is <em>case</em> or <em>control</em>, never both. Those categories are mutually exclusive. Exposure and disease, however, are <strong>not</strong> disjoint (a person can be both a smoker and a case), which is exactly why they can be <em>associated</em>.</p>
 <div class="cell" data-autorun="false">
@@ -374,6 +550,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMg
 </section>
 <section id="conditioning-on-information" class="slide level2 smaller">
 <h2>Conditioning on information</h2>
+<aside class="notes">
+<ul>
+<li>“Conditioning = shrink the world to just the group where B is true, then ask about A inside it.” P(A|B) = P(A∩B)/P(B).</li>
+<li>Concrete: “P(case | smoker) — ignore everyone else, look only at smokers; what fraction are cases?”</li>
+<li>Rearrange → multiplication rule P(A∩B)=P(B)·P(A|B). Tie to the probability tree: “multiply along the branches — THIS is that rule.”</li>
+<li>Epi framing: risk in the exposed, survival given treatment, disease given a positive test — all conditional probabilities. Question: “Is P(smoker | case) the same as P(case | smoker)?” (NO — order matters. Plants the seed for Bayes.) Transition: “Let’s see marginal, joint, and conditional all in one table.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>The probability of <span class="math inline">\(A\)</span> <strong>given</strong> that <span class="math inline">\(B\)</span> occurred restricts attention to the world where <span class="math inline">\(B\)</span> is true: <span class="math display">\[P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) &gt; 0.\]</span></p>
 <p>Rearranging gives the <strong>general multiplication rule</strong> <span class="math inline">\(P(A\cap B)=P(B)\,P(A\mid B)\)</span>. Conditioning is necessary in epidemiology:</p>
 <ul>
@@ -384,6 +578,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMg
 </section>
 <section id="contingency-tables-marginal-joint-conditional" class="slide level2 smaller">
 <h2>Contingency tables: marginal, joint, conditional</h2>
+<aside class="notes">
+<ul>
+<li>Run the cell. Three outputs: counts; prop.table (JOINT — all cells sum to 1); prop.table(margin=1) (CONDITIONAL — each row sums to 1).</li>
+<li>Define on the table: marginal = the totals (overall prevalence); joint = a single cell (P(smoker AND case)); conditional = a cell relative to its row (P(case | smoker)).</li>
+<li>The fragment: the bottom row of the last output IS P(case | smoker) = 0.289 — point straight at it.</li>
+<li>Callback: the table and the probability tree hold the same information two ways. Question: “Which output gives the overall prevalence?” (The margins — marginal.) Transition: “Now the payoff — compare that conditional across groups and you get RISK.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>A 2×2 table holds all three probability types at once:</p>
 <ul>
 <li><strong>marginal</strong> (row/column totals),</li>
@@ -406,6 +618,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRh
 </section>
 <section id="conditional-probability-is-risk" class="slide level2 smaller">
 <h2>Conditional probability <em>is</em> risk</h2>
+<aside class="notes">
+<ul>
+<li>Run the cell. Risk in smokers 0.289, in non-smokers 0.082, ratio 3.54.</li>
+<li>“This IS an epidemiological analysis in three lines: risk in the exposed ÷ risk in the unexposed. Smokers are 3.5× as likely to be cases.”</li>
+<li>Stress: it’s a ratio of two conditional probabilities — everything we built leads here.</li>
+<li>Honest caveat: association ≠ causation. Here the association is real by design (simulated); in real data you’d worry about confounding. Question: “If the risk ratio were 1.0, what would that mean?” (No association → independence, next slide.) Transition: “A ratio of 1 means the two are independent — let’s define that and its famous trap.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Comparing a conditional probability across exposure groups gives the <strong>risk ratio</strong> — the measure of association in epidemiology.</p>
 <div class="cell" data-autorun="false">
 <div>
@@ -423,6 +653,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBf
 </section>
 <section id="independence-and-the-gamblers-fallacy" class="slide level2 smaller">
 <h2>Independence and the gambler’s fallacy</h2>
+<aside class="notes">
+<ul>
+<li>Independent = conditioning changes nothing: P(A|B)=P(A), equivalently P(A∩B)=P(A)·P(B).</li>
+<li>“If smoking and disease were independent, knowing someone smokes wouldn’t change their risk — risk ratio 1.”</li>
+<li>Gambler’s fallacy: independent trials have NO memory. Five reds in a row doesn’t make black ‘due.’ Each roll, flip, or patient is a fresh draw (callback: no die roll remembers the last).</li>
+<li>Clinical relevance: a second INDEPENDENT test doesn’t ‘balance out’ the first. Question: “A coin lands heads 4 times — P(heads) next toss?” (Still 1/2.) Transition: “The most important conditional-probability skill in medicine is flipping one around — enter Bayes.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p><span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> when conditioning changes nothing: <span class="math display">\[P(A\mid B)=P(A) \quad\Longleftrightarrow\quad P(A\cap B)=P(A)\,P(B).\]</span></p>
 <p>If exposure and disease were independent, the risk ratio would be 1 — no association. Independence also has a famous trap, past independent outcomes carry <strong>no</strong> information about the next one (<strong><em>The gambler’s fallacy</em></strong>).</p>
 <p>Each new patient, coin flip, or test is a fresh draw.</p>
@@ -430,10 +678,43 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBf
 <section>
 <section id="bayes-theorem-diagnostic-testing" class="title-slide slide level1 section-slide center" data-background-image="assets/africa_orange.png" data-background-size="42%" data-background-position="left">
 <h1>Bayes’ theorem &amp; diagnostic testing</h1>
-
+<aside class="notes">
+<p>Question for the class: Before we continue, what do you think is the main difference between a Frequentist and a Bayesian way of thinking about probability?</p>
+<p>Expected answer (simple):</p>
+<p>Frequentist: Probability is the long-run frequency of an event if we repeated the same experiment many times. The unknown parameter is fixed, but the data vary.</p>
+<p>Bayesian: Probability represents our degree of belief about an event or parameter. We begin with what we already know (a prior) and update that belief with new evidence to obtain a posterior probability.</p>
+<p>Simple example: Imagine a doctor suspects a patient has a disease. A Frequentist asks: “If we repeated this test on thousands of similar patients, how often would it be correct?” A Bayesian asks: “Given what we already know about how common the disease is and this patient’s positive test result, what is the probability that this patient actually has the disease?” Key takeaway: Frequentists learn from repeated experiments, while Bayesians learn by updating beliefs as new evidence becomes available. Transition: “This Bayesian way of updating our beliefs is exactly what we’ll use next to understand why a highly accurate test can still produce many false positives.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="inverting-a-conditional-probability" class="slide level2 smaller">
 <h2>Inverting a conditional probability</h2>
+<aside class="notes">
+<ul>
+<li>The problem: a test gives P(positive | disease), but the patient needs P(disease | positive) — the REVERSE. These are not the same (callback: order matters, slide 17).</li>
+<li>Bayes flips it. Show the formula but don’t dwell on algebra — the denominator is just “all the ways to test positive.”</li>
+<li>Re-anchor the four terms plainly (spam-filter/smoke-alarm): sensitivity, specificity, prevalence, and the target we want — PPV. Question: “Why isn’t P(disease | positive) just the test’s sensitivity?” (Because false positives from the huge healthy majority flood in — segue.) Transition: “Let’s make that concrete with a headcount before we compute.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>A test tells us <span class="math inline">\(P(\text{positive}\mid\text{disease})\)</span>, but a clinician needs the <strong>inverse</strong>, <span class="math inline">\(P(\text{disease}\mid\text{positive})\)</span>.</p>
 <p><strong>Bayes’ theorem</strong> flips it:</p>
 <p><span class="math display">\[P(A\mid B)=\frac{P(B\mid A)\,P(A)}{P(B\mid A)P(A)+P(B\mid A')P(A')}.\]</span></p>
@@ -447,6 +728,23 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBf
 </section>
 <section id="the-diagnostic-22-table" class="slide level2 smaller">
 <h2>The diagnostic 2×2 table</h2>
+<aside class="notes">
+<ul>
+<li>Walk the headcount: 100,000 people, 0.35% prevalence → 350 sick, 99,650 healthy. Test catches 312 true positives, but misfires on 6,975 healthy people (false positives); 7,287 test positive in total.</li>
+<li>If using the colour 2×2 image: DOWN the columns = sensitivity/specificity (properties of the test); ACROSS the rows = PPV/NPV (what your result means). Same 312 true positives feed both sensitivity (312/350 = 89%) and PPV (312/7,287 = 4.3%) — only the denominator changed.</li>
+<li>Land it: “Of 7,287 positives, only 312 are truly sick — the false positives from the huge healthy crowd swamp them.” Question (before revealing): “Guess — of everyone who tests positive, what % are actually sick?” (Most guess high; reveal 4.3% next slide.) Transition: “Let’s confirm that 4.3% straight from the probabilities.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Picture screening <strong>100,000 people</strong> with this test — 89% sensitivity, 93% specificity, for a disease with <strong>0.35% prevalence</strong>. Everyone lands in one of four cells:</p>
 <table class="caption-top">
 <thead>
@@ -529,6 +827,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNt
 </section>
 <section id="from-events-to-numbers" class="slide level2 smaller">
 <h2>From events to numbers</h2>
+<aside class="notes">
+<ul>
+<li>“A random variable just attaches a NUMBER to each outcome — days in hospital, new cases this week, cost of care.”</li>
+<li>Expected value = probability-weighted average = the long-run mean. E(X) = Σ x·P(x).</li>
+<li>Run the cell: length of stay, E(X) = 0.7 days. “Average this over thousands of patients and you’d get 0.7.”</li>
+<li>Epi meaning: expectation = expected BURDEN — bed-days per patient, cases per week, cost per episode — how you scale to a population. Question: “No single patient stays 0.7 days — so what does 0.7 mean?” (An average over many, not any one person.) Transition: “The average isn’t the whole story — two wards with the same mean can feel very different. That’s variance.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>A <strong>random variable</strong> <span class="math inline">\(X\)</span> attaches a number to each outcome, example days of hospital stay, number of new cases, cost of care.</p>
 <p>Its <strong>expected value</strong> is the probability-weighted average, the long-run mean: <span class="math display">\[E(X)=\sum_i x_i\,P(X=x_i).\]</span></p>
 <p>Expectation is how we turn a probability distribution into an <strong>expected burden</strong>, also cases per week, bed-days per patient, cost per episode.</p>
@@ -545,6 +861,24 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ingg
 </section>
 <section id="variability-variance-and-standard-deviation" class="slide level2 smaller">
 <h2>Variability: variance and standard deviation</h2>
+<aside class="notes">
+<ul>
+<li>Variance = probability-weighted average of SQUARED distances from the mean; SD = its square root (back in the original units — ‘days’).</li>
+<li>Run the cell: E(X)=0.7, Var=0.81, SD=0.9 days; the barplot shows the distribution.</li>
+<li>Key point: “Two interventions can share the SAME expected outcome but different spread — and spread IS risk. Same average, bigger variance = less predictable.”</li>
+<li>Use SD, not variance, to talk to people — it’s in the same units as the data. Question: “Two wards both average 0.7 days; one has SD 0.2, the other SD 2 — which would you rather manage?” Transition: “That’s the toolkit — let’s pull it together.” → next.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>The <strong>variance</strong> measures how much outcomes scatter around <span class="math inline">\(E(X)\)</span>, weighting squared deviations by their probability: <span class="math display">\[\operatorname{Var}(X)=\sum_i (x_i-\mu)^2\,P(X=x_i), \qquad \sigma=\sqrt{\operatorname{Var}(X)}.\]</span></p>
 <p>Two interventions can share the same expected outcome yet differ sharply in <strong>risk</strong> — the spread. Variance is how we quantify that uncertainty.</p>
 <div class="cell" data-autorun="false">
@@ -565,6 +899,25 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ingg
 </section>
 <section id="recap" class="slide level2 smaller">
 <h2>Recap</h2>
+<aside class="notes">
+<ul>
+<li>A probability is a proportion — in R, mean(condition). Prevalence and risk are probabilities.</li>
+<li>Set operations + the addition rule combine events; mutually exclusive events add.</li>
+<li>Conditional probability is the engine of epi; comparing it across groups gives the risk ratio.</li>
+<li>Bayes turns test accuracy into predictive value — and warns about false positives when disease is rare.</li>
+<li>Random variables summarise numeric outcomes via expectation (burden) and variance (uncertainty). The single thread: “every one of these was a proportion or a weighted average — probability is just careful counting.” Preview: distributions (binomial, Poisson, normal) and statistical inference next. Question: “Which of these will you use most in your own work?” (Gets them to self-connect.) Transition: → close.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <ul>
 <li>A <strong>probability is a proportion</strong> — in R, <code>mean(condition)</code>. Prevalence and risk are probabilities.</li>
 <li><strong>Set operations</strong> (∪, ∩, −, complement) and the addition rule combine events; <strong>mutually exclusive</strong> events simply add.</li>
