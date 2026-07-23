@@ -38,38 +38,7 @@ resources:
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-::: {.notes}
-Today I will take you through Probability where majority of the concepts in this course stands on — risk, diagnostic testing, and statistical inference are all probability disguise.
-
-Set the tone: This slide deck is interactive. The grey boxes are live R — I'll run them as we go, and because it's hosted online you can open the same link on your laptop, edit the code, and re-run it yourself.
-:::
-
 ## From data to decisions {.smaller}
-
-::: {.notes}
-Probability is the language for uncertainty, and it lets us go from what we measured in a sample to a claim about the whole population."
-
-- Prevalence & risk: a probability is just a proportion of people. "The chance a
-  random person is a case" and "the prevalence" are similar.
-
-- Diagnostic testing — explain each in plain words (think of a smoke alarm):
-    • Sensitivity — how good the test is at CATCHING people who really are sick.
-      Out of 100 people who truly have the disease, how many does it correctly
-      call positive?
-    • Specificity — how good the test is at giving the ALL-CLEAR to people who are
-      NOT sick. Out of 100 healthy people, how many does it correctly call
-      negative? (think of an email spam filter, where "positive" = flagged as spam)
-      How well it LEAVES YOUR REAL EMAILS ALONE. Of all your genuine
-      messages, how many does it correctly keep out of the spam folder? A specific
-      filter rarely bins a real email by mistake
-    • Positive predictive value (PPV) — it answer's the question: 
-    "Of all the people who test positive, what fraction are truly sick."
-    • Negative predictive value (NPV) — the mirror: "Of all the people who test negative, 
-    what fraction are truly healthy (disease-free)."
-
-- Inference: p-values and confidence intervals are probability statements. If the
-  probability model is shaky, the inference is too.
-:::
 
 You have already summarise data and fit models. **Probability** is the connective
 tissue underneath: it is how we quantify *uncertainty* and move from a sample to
@@ -87,31 +56,6 @@ In public health it is behind:
 
 ## Defining probability {.smaller}
 
-::: {.notes}
-Two ideas live on this slide
-
-Idea 1 — long-run frequency: The probability of something is the fraction of
-times it happens if you repeat the experiment over and over. We can't roll
-forever, but that fraction is the target we're heading toward.
-
-Idea 2 — the counting shortcut: "When the outcomes are all equally likely, we
-don't need to repeat anything — we just count: favourable outcomes over total
-outcomes." The die is perfect because all six faces are equally likely.
-
-Walk the four bullets as an escalating story — each one teaches a new rule:
-- P(1) = 1/6 — the base case. Ask the room "what's the chance of a 4?" so they say
-  1/6 too and feel the symmetry.
-- P(1 or 2) = 2/6 = 1/3 — widen the event to two faces. This is the ADDITION idea;
-  note in passing "a die can't show 1 and 2 at once" — quietly introduces mutually
-  exclusive events (slide 1.7).
-- P(any of 1–6) = 1 — something MUST happen, so probability 1 = certainty. Anchor
-  the top of the scale; contrast with rolling a 7 (probability 0) for the bottom.
-- P(not a 2) = 5/6 — the COMPLEMENT. Show it two ways: count the five non-2 faces,
-  OR do 1 − 1/6. Land the payoff:
-
-Transition: "Let's watch that first idea, long-run frequency actually happen."
-:::
-
 Intuitively, the **probability** of an outcome is the proportion of times it
 would occur if the experiment were repeated indefinitely. Its a  *long-run
 relative frequency*.
@@ -128,50 +72,6 @@ A fair die has **six equally likely** faces:
 - $$P(\text{not a } 2) = 1 - \tfrac{1}{6} = 5/6$$ — **the complement.**
 
 ## Defining probability, live {.smaller}
-
-::: {.notes}
-Step 1 — run the cell. The four printed lines just confirm the dice numbers from
-the last slide (1/6, 1/3, 1, 5/6). Read them off quickly; the plot is the star.
-
-Step 2 — TALK THROUGH THE PLOT:
-- Orange is what actually HAPPENED — the running proportion of 1s as rolls pile up.
-  Blue dashed is the TRUTH we're chasing: exactly 1/6 ≈ 0.167. Blue isn't a
-  simulation; abline() just paints a flat marker at 1/6." Stress: these are
-  observed-vs-truth, NOT two competing scenarios (students often assume one line is
-  one method, the other another — it isn't).
-
-— HOW THE ROLLING WORKS
-1) sample(die, 6000, replace = TRUE) = "draw a face 6,000 times, putting the die
-   back each time" — every roll independent, all six faces always available.
-2) rolls == 1 marks each roll yes/no (is it a 1?).
-3) cumsum(...)/seq_along(...) = running tally of 1s ÷ rolls so far = the orange
-   line. (set.seed(1) just makes the rolls reproducible, not less random.)
-The very first roll here is a 1, so the line starts at a wild 1.0, then drifts
-down as the early luck gets diluted — ending ~0.163, a hair under 1/6.
-
-— WHY JUMPY EARLY, SMOOTH LATE — use the GRADE-AVERAGE analogy (this is the one):
-"The orange line behaves exactly like your exam average. Your FIRST exam IS your
-average — one mark, 100% of the weight, so it can sit anywhere. A second exam can
-still swing it hugely. But after 30 exams, one more paper barely nudges your
-average — it's diluted by all the others. Each die roll is just 'one more exam'
-added in. 
-
-Few results → volatile average; many results → rock-steady average."
-
-— BANK THE LESSON (say it explicitly): "The gap between orange and blue is
-sampling error, and it shrinks as the sample grows. Same reason a prevalence from
-20 patients bounces around but one from 5,000 is trustworthy — the seed of
-statistical inference."
-
-- Name it: "This is the Law of Large Numbers, and it IS the frequentist
-  definition of probability — the long-run proportion converging to the true
-  value."
-
-Step 3 — make it interactive. Ask a student: "Change 6000 to 100 and re-run."
-It never really settles — the point of small samples. Then change set.seed(1) to
-another number (or delete it) and re-run to show a DIFFERENT random path that
-still lands near 1/6. Different journeys, same destination.
-:::
 
 The **frequentist** definition in action: as we keep rolling, the observed proportion of 1s settles at $1/6$.
 
@@ -220,43 +120,6 @@ head(cohort, 5)
 
 ## Sample space and events
 
-::: {.notes}
-"Before we can talk about the probability of something, we have to be
-clear about what CAN happen. That full list of possibilities is the sample space."
-
-Define the two terms concretely:
-- Sample space (S) = the set of ALL possible outcomes of an experiment. Event =
-  any subset of S — one outcome, several, or none.
-- If the outcomes are all equally likely, each single one has probability 1/|S|
-  (|S| = how many outcomes there are). Tie back to the die: S = {1,2,3,4,5,6},
-  |S| = 6, each face 1/6.
-
-The subtlety worth flagging (from the iris warm-up): the sample space depends on
-WHAT YOU DECIDE TO RECORD. "Pick a flower and note its SPECIES" → S = {setosa,
-versicolor, virginica}, just three outcomes, so P(setosa) = 1/3. 
-
-But "pick a flower and note ALL its measurements" → a huge sample space. Same flower,
-different experiment, different S. Good 20-second point: you define the experiment,
-you define the sample space.
-
-Simple vs compound:
-- Simple event = a single outcome. e.g. "the person I drew is a case."
-- Compound event = more than one outcome bundled together. e.g. "case AND smoker,"
-  or "Sepal.Length > 5" (which is true for MANY flowers, so it's compound).
-
-Bridge to epidemiology (say it): "Our experiment this session is 'draw a random
-person from the cohort.' The sample space is every person; an event is any group
-we care about — the cases, the smokers, the over-50s. Probability is just how big
-that group is relative to everyone."
-
-Question to the room: "If I draw one person and record only their disease status,
-what's my sample space?" (Answer: {case, control} — two outcomes.) "Now if I also
-record smoking status?" (Four combinations.) Shows how recording more expands S.
-
-
-:::
-
-
 The **sample space** $S$ is the set of all possible outcomes of an experiment.
 An **event** is any subset of $S$. If all $|S|$ outcomes are equally likely, each
 has probability $1/|S|$.
@@ -277,18 +140,6 @@ has sample space {setosa, versicolor, virginica}.
 - $$P(\text{setosa}) = 1/3$$
 
 ## Events as probabilities in R {.smaller}
-
-::: {.notes}
-Purpose (~2–3 min): the single most useful coding idea of the day.
-Lead: "In R, an event is just a TRUE/FALSE question about each person, and mean()
-of that gives the proportion that are TRUE — which IS the probability."
-- Run it. iris warm-up: mean(Sepal.Length > 5) = 0.787. Then epi: P(case) = 0.172
-  (the prevalence), P(smoker) = 0.436.
-- Hammer the fragment: probability and proportion are the SAME object. "0.172 is
-  both 'the probability a random person is a case' AND 'the prevalence.'"
-Question: "How would you write P(age > 60)?" (mean(cohort$age > 60).)
-Transition: "Now let's combine events — AND, OR, NOT." → next.
-:::
 
 An event is a logical condition. Its probability is the **mean of that logical
 vector** (the proportion of `TRUE`s).
@@ -313,19 +164,6 @@ mean(cohort$smoker == "yes")
 
 ## Combining events {.smaller}
 
-::: {.notes}
-- Walk the table: union (OR), intersection (AND), difference (but not), complement
-  (not). Sketch a two-circle Venn with your hands.
-- The union MINUS term is the one to explain: "why subtract the overlap? People who
-  are BOTH get counted in P(A) and again in P(B) — subtract them once to fix the
-  double-count."
-- Complement = the workhorse shortcut (callback to dice 'not a 2': 1 − P).
-- Empty set = impossible event, probability 0.
-Question: "In a Venn diagram, which region is A − B?" (A, minus the overlap.)
-Transition: "Let's compute all four on the cohort, one line each." → next.
-:::
-
-
 | Operation | Notation | Meaning | Rule |
 |---|---|---|---|
 | Union | $A \cup B$ | $A$ **or** $B$ (or both) | $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ |
@@ -337,18 +175,6 @@ The union rule subtracts $P(A\cap B)$ so the overlap is not counted twice. The
 empty event $\varnothing$ has $P(\varnothing)=0$.
 
 ## Set operations in R {.smaller}
-
-::: {.notes}
-- Run the cell. Point out the operators: | = OR (union), & = AND (intersection),
-  ! = NOT (complement), & ! = difference.
-- Read results: P(smoker)=0.436, P(case)=0.172, union 0.482, intersect 0.126,
-  smoker-only 0.310, not-case 0.828.
-- Do the union-rule check LIVE (the fragment): 0.436 + 0.172 − 0.126 = 0.482 —
-  exactly mean(S | D). "Formula and direct count agree — the addition rule working."
-Question: get a student to predict P(smoker OR case) before you reveal it, then check.
-Transition: "We've been doing favourable-over-total without naming it — let's make
-the definition explicit." → next.
-:::
 
 ```{webr}
 #| autorun: false
@@ -370,20 +196,6 @@ Check the union rule: $$P(S)+P(D)-P(S\cap D) = 0.436 + 0.172 - 0.126 = 0.482$$ *
 # 1.6 Definition of probability {.section-slide background-image="assets/africa_orange.png" background-size="42%" background-position="left"}
 
 ## What a probability is {.smaller}
-
-::: {.notes}
-- Classical formula: favourable ÷ total (already intuitive from the die).
-- Three axioms in plain words: probabilities are never negative; something in S is
-  certain (P(S)=1); for disjoint events, probabilities add. "Everything in
-  probability is built from these three."
-- Frequentist reading → why mean() estimates a probability, and why bigger samples
-  are steadier (callback to the die plot).
-- Run the cell: prevalence estimated from n = 20, 100, 500 — watch it steady as n
-  grows. Re-run to show the n=20 estimate jumping around.
-Question: "Which estimate would you trust — n=20 or n=500? Why?"
-Transition: "One more term before conditioning — events that can't co-occur." → next.
-:::
-
 
 Classically, for equally likely outcomes,
 $$P(A) = \frac{\text{number of outcomes in } A}{\text{total number of outcomes in } S}.$$
@@ -408,17 +220,6 @@ for (m in c(20, 100, 500)) {
 
 ## Events that cannot co-occur {.smaller}
 
-::: {.notes}
-- "Mutually exclusive = can't both happen. Then P(A∩B)=0 and OR simply ADDS."
-- Case vs control: mutually exclusive (nobody is both) → run it: mean(case & control)=0.
-- BUT smoker & case are NOT exclusive → 0.126. "And that's the whole point: because
-  they CAN co-occur, they can be ASSOCIATED. If exposure and disease were mutually
-  exclusive, smoking would perfectly PREVENT disease."
-Question: "Name two health events that ARE mutually exclusive, and two that AREN'T."
-Transition: "When events can co-occur, we ask — given one, what's the chance of the
-other? That's conditioning." → next.
-:::
-
 Two events are **mutually exclusive** (disjoint) when they cannot happen
 together: $A \cap B = \varnothing$, so $P(A\cap B)=0$ and the addition rule
 simplifies to
@@ -439,20 +240,6 @@ mean(cohort$smoker == "yes" & cohort$outcome == "case")
 
 ## Conditioning on information {.smaller}
 
-::: {.notes}
-- "Conditioning = shrink the world to just the group where B is true, then ask
-  about A inside it." P(A|B) = P(A∩B)/P(B).
-- Concrete: "P(case | smoker) — ignore everyone else, look only at smokers; what
-  fraction are cases?"
-- Rearrange → multiplication rule P(A∩B)=P(B)·P(A|B). Tie to the probability tree:
-  "multiply along the branches — THIS is that rule."
-- Epi framing: risk in the exposed, survival given treatment, disease given a
-  positive test — all conditional probabilities.
-Question: "Is P(smoker | case) the same as P(case | smoker)?" (NO — order matters.
-Plants the seed for Bayes.)
-Transition: "Let's see marginal, joint, and conditional all in one table." → next.
-:::
-
 The probability of $A$ **given** that $B$ occurred restricts attention to the
 world where $B$ is true:
 $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0.$$
@@ -465,20 +252,6 @@ $P(A\cap B)=P(B)\,P(A\mid B)$. Conditioning is necessary in epidemiology:
 - **disease** *given* a positive test.
 
 ## Contingency tables: marginal, joint, conditional {.smaller}
-
-::: {.notes}
-- Run the cell. Three outputs: counts; prop.table (JOINT — all cells sum to 1);
-  prop.table(margin=1) (CONDITIONAL — each row sums to 1).
-- Define on the table: marginal = the totals (overall prevalence); joint = a single
-  cell (P(smoker AND case)); conditional = a cell relative to its row
-  (P(case | smoker)).
-- The fragment: the bottom row of the last output IS P(case | smoker) = 0.289 —
-  point straight at it.
-- Callback: the table and the probability tree hold the same information two ways.
-Question: "Which output gives the overall prevalence?" (The margins — marginal.)
-Transition: "Now the payoff — compare that conditional across groups and you get
-RISK." → next.
-:::
 
 A 2×2 table holds all three probability types at once:
 
@@ -500,20 +273,6 @@ The bottom row of the last output is $P(\text{case}\mid\text{smoker})$
 
 ## Conditional probability *is* risk {.smaller}
 
-::: {.notes}
-- Run the cell. Risk in smokers 0.289, in non-smokers 0.082, ratio 3.54.
-- "This IS an epidemiological analysis in three lines: risk in the exposed ÷ risk
-  in the unexposed. Smokers are 3.5× as likely to be cases."
-- Stress: it's a ratio of two conditional probabilities — everything we built leads
-  here.
-- Honest caveat: association ≠ causation. Here the association is real by design
-  (simulated); in real data you'd worry about confounding.
-Question: "If the risk ratio were 1.0, what would that mean?" (No association →
-independence, next slide.)
-Transition: "A ratio of 1 means the two are independent — let's define that and its
-famous trap." → next.
-:::
-
 Comparing a conditional probability across exposure groups gives the **risk ratio** — the measure of association in epidemiology.
 
 ```{webr}
@@ -532,20 +291,6 @@ Smokers are **3.5 times** as likely to be cases. That single number, a ratio of 
 
 ## Independence and the gambler's fallacy {.smaller}
 
-::: {.notes}
-- Independent = conditioning changes nothing: P(A|B)=P(A), equivalently
-  P(A∩B)=P(A)·P(B).
-- "If smoking and disease were independent, knowing someone smokes wouldn't change
-  their risk — risk ratio 1."
-- Gambler's fallacy: independent trials have NO memory. Five reds in a row doesn't
-  make black 'due.' Each roll, flip, or patient is a fresh draw (callback: no die
-  roll remembers the last).
-- Clinical relevance: a second INDEPENDENT test doesn't 'balance out' the first.
-Question: "A coin lands heads 4 times — P(heads) next toss?" (Still 1/2.)
-Transition: "The most important conditional-probability skill in medicine is
-flipping one around — enter Bayes." → next.
-:::
-
 $A$ and $B$ are **independent** when conditioning changes nothing:
 $$P(A\mid B)=P(A) \quad\Longleftrightarrow\quad P(A\cap B)=P(A)\,P(B).$$
 
@@ -555,40 +300,7 @@ Each new patient, coin flip, or test is a fresh draw.
 
 # Bayes' theorem & diagnostic testing {.section-slide background-image="assets/africa_orange.png" background-size="42%" background-position="left"}
 
-::: {.notes}
-Question for the class: Before we continue, what do you think is the main difference between a Frequentist and a Bayesian way of thinking about probability?
-
-Expected answer (simple):
-
-
-Frequentist: Probability is the long-run frequency of an event if we repeated the same experiment many times. The unknown parameter is fixed, but the data vary.
-
-
-Bayesian: Probability represents our degree of belief about an event or parameter. We begin with what we already know (a prior) and update that belief with new evidence to obtain a posterior probability.
-
-
-Simple example:
-Imagine a doctor suspects a patient has a disease.
-A Frequentist asks: "If we repeated this test on thousands of similar patients, how often would it be correct?"
-A Bayesian asks: "Given what we already know about how common the disease is and this patient's positive test result, what is the probability that this patient actually has the disease?"
-Key takeaway: Frequentists learn from repeated experiments, while Bayesians learn by updating beliefs as new evidence becomes available.
-Transition: "This Bayesian way of updating our beliefs is exactly what we'll use next to understand why a highly accurate test can still produce many false positives."
-:::
-
-
 ## Inverting a conditional probability {.smaller}
-::: {.notes}
-- The problem: a test gives P(positive | disease), but the patient needs
-  P(disease | positive) — the REVERSE. These are not the same (callback: order
-  matters, slide 17).
-- Bayes flips it. Show the formula but don't dwell on algebra — the denominator is
-  just "all the ways to test positive."
-- Re-anchor the four terms plainly (spam-filter/smoke-alarm): sensitivity,
-  specificity, prevalence, and the target we want — PPV.
-Question: "Why isn't P(disease | positive) just the test's sensitivity?" (Because
-false positives from the huge healthy majority flood in — segue.)
-Transition: "Let's make that concrete with a headcount before we compute." → next.
-:::
 
 A test tells us $P(\text{positive}\mid\text{disease})$, but a clinician needs the
 **inverse**, $P(\text{disease}\mid\text{positive})$.
@@ -606,21 +318,6 @@ In screening language:
 and the answer we want is the **positive predictive value** $P(\text{disease}\mid +)$.
 
 ## The diagnostic 2×2 table {.smaller}
-
-::: {.notes}
-- Walk the headcount: 100,000 people, 0.35% prevalence → 350 sick, 99,650 healthy.
-  Test catches 312 true positives, but misfires on 6,975 healthy people (false
-  positives); 7,287 test positive in total.
-- If using the colour 2×2 image: DOWN the columns = sensitivity/specificity
-  (properties of the test); ACROSS the rows = PPV/NPV (what your result means).
-  Same 312 true positives feed both sensitivity (312/350 = 89%) and PPV
-  (312/7,287 = 4.3%) — only the denominator changed.
-- Land it: "Of 7,287 positives, only 312 are truly sick — the false positives from
-  the huge healthy crowd swamp them."
-Question (before revealing): "Guess — of everyone who tests positive, what % are
-actually sick?" (Most guess high; reveal 4.3% next slide.)
-Transition: "Let's confirm that 4.3% straight from the probabilities." → next.
-:::
 
 Picture screening **100,000 people** with this test — 89%
 sensitivity, 93% specificity, for a disease with **0.35% prevalence**. Everyone
@@ -689,21 +386,6 @@ Death was about **1 in 40** for the inoculated versus **1 in 7** not innoculated
 
 ## From events to numbers {.smaller}
 
-::: {.notes}
-- "A random variable just attaches a NUMBER to each outcome — days in hospital,
-  new cases this week, cost of care."
-- Expected value = probability-weighted average = the long-run mean.
-  E(X) = Σ x·P(x).
-- Run the cell: length of stay, E(X) = 0.7 days. "Average this over thousands of
-  patients and you'd get 0.7."
-- Epi meaning: expectation = expected BURDEN — bed-days per patient, cases per week,
-  cost per episode — how you scale to a population.
-Question: "No single patient stays 0.7 days — so what does 0.7 mean?" (An average
-over many, not any one person.)
-Transition: "The average isn't the whole story — two wards with the same mean can
-feel very different. That's variance." → next.
-:::
-
 A **random variable** $X$ attaches a number to each outcome, example days of hospital stay, number of new cases, cost of care.
 
 Its **expected value** is the probability-weighted average, the long-run mean:
@@ -721,18 +403,6 @@ cat("E(X) = expected stay =", Ex, "days\n")
 ```
 
 ## Variability: variance and standard deviation {.smaller}
-
-::: {.notes}
-- Variance = probability-weighted average of SQUARED distances from the mean;
-  SD = its square root (back in the original units — 'days').
-- Run the cell: E(X)=0.7, Var=0.81, SD=0.9 days; the barplot shows the distribution.
-- Key point: "Two interventions can share the SAME expected outcome but different
-  spread — and spread IS risk. Same average, bigger variance = less predictable."
-- Use SD, not variance, to talk to people — it's in the same units as the data.
-Question: "Two wards both average 0.7 days; one has SD 0.2, the other SD 2 — which
-would you rather manage?"
-Transition: "That's the toolkit — let's pull it together." → next.
-:::
 
 The **variance** measures how much outcomes scatter around $E(X)$, weighting
 squared deviations by their probability:
@@ -758,25 +428,6 @@ bp <- barplot(p, names.arg = x, col = "#2DA7E0", border = "white",
 # Wrap-up {.section-slide background-image="assets/africa_orange.png" background-size="42%" background-position="left"}
 
 ## Recap {.smaller}
-
-::: {.notes}
-- A probability is a proportion — in R, mean(condition). Prevalence and risk are
-  probabilities.
-- Set operations + the addition rule combine events; mutually exclusive events add.
-- Conditional probability is the engine of epi; comparing it across groups gives the
-  risk ratio.
-- Bayes turns test accuracy into predictive value — and warns about false positives
-  when disease is rare.
-- Random variables summarise numeric outcomes via expectation (burden) and variance
-  (uncertainty).
-The single thread: "every one of these was a proportion or a weighted average —
-probability is just careful counting." Preview: distributions (binomial, Poisson,
-normal) and statistical inference next.
-Question: "Which of these will you use most in your own work?" (Gets them to
-self-connect.)
-Transition: → close.
-:::
-
 
 - A **probability is a proportion** — in R, `mean(condition)`. Prevalence and risk are probabilities.
 - **Set operations** (∪, ∩, −, complement) and the addition rule combine events; **mutually exclusive** events simply add.
